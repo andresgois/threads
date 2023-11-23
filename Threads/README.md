@@ -7,7 +7,7 @@
 
 - Vimos na aula que a JVM mapeia as threads java para threads nativas do sistema:
 
-![Threads](../img_readme/threads.001.png)
+![Threads](../asserts/threads.001.png)
 
 - E se o sistema operacional por baixo não desse suporte ao multi-threading nativo? Aí entram as threads que também se chamam de Green Threads. Nesse caso a JVM simularia um ambiente multi-threaded, mas na verdade só pode ter um processo ou thread executando ao mesmo tempo.
 
@@ -93,19 +93,19 @@ public class Banheiro {
 
 
 
-![Collections](../img_readme/java-util1.png)
+![Collections](../asserts/java-util1.png)
 
 
 - Se a classe Vector é a versão thread-safe de uma lista, será que existem para as outras interfaces implementações thread-safe? Claro que sim!
 
 - Para os mapas (Map) podemos usar a antiga classe Hashtable:
 
-- Map mapaThreadSafe = new Hashtable();COPIAR CÓDIGO
+- Map mapaThreadSafe = new Hashtable();
 E também temos uma implementação mais recente e performática de mapas, a classe ConcurrentHashMap:
 
 - //do pacote java.util.concurrent
 ```
-Map mapaThreadSafe = new ConcurrentHashMap();COPIAR CÓDIGO
+Map mapaThreadSafe = new ConcurrentHashMap();
 ```
 - Para o Set (conjunto) não existe uma implementação pronta na API padrão do Java mas podemos utilizar a classe Collections para construir um Set sincronizado:
 
@@ -403,13 +403,3 @@ synchronized (pool) {  //primeiro pool
 
 > O que acontece em um software quando ocorre um deadlock?
 - Somente as threads envolvidas no deadlock ficam paradas.
-
-
-
-
-
-
-
-
-
-

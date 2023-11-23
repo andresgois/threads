@@ -20,7 +20,7 @@
 
 - Para continuarmos a aprender mais sobre as threads da JVM, escolhemos um projeto prático onde introduzimos passo a passo novos recursos sobre threads. O objetivo é criar um servidor onde podemos submeter tarefas a executar. O servidor pode ou não confirmar o recebimento das tarefas e, claro, deve executá-las em paralelo. 
 
-![Server 1](../img_readme/thread2_server_client.png)
+![Server 1](../asserts/thread2_server_client.png)
 
 ### Socket e TCP/IP
 - Por conta da necessidade de dois computadores se comunicarem, surgiram diversos protocolos que permitissem tal troca de informação. O protocolo que vamos usar aqui é o TCP (Transmission Control Protocol*).
@@ -47,7 +47,7 @@ Assim como existe o IP para identificar uma máquina, a porta é a solução par
 O que é um Socket?
 Já sabemos que vamos utilizar o TCP e que precisamos do IP da máquina servidora e a porta. Todos esses detalhes do protocolo são abstraídos no mundo Java através de um socket. Um socket é o ponto-final de um fluxo de comunicação entre duas aplicações, através de uma rede. É exatamente isso que estamos procurando!
 
-![Server 2](../img_readme/thread2_server_client2.png)
+![Server 2](../asserts/thread2_server_client2.png)
 
 > Vimos como aceitar um cliente através de um ServerSocket.
 ```
@@ -90,7 +90,7 @@ ExecutorService poolDeThreads = Executors.newFixedThreadPool(5);
 ```
 ExecutorService threadPool = Executors.newCachedThreadPool();
 ```
-![Socker](../img_readme/threads_socket.png)
+![Socker](../asserts/threads_socket.png)
 
 > Um pool de threads é um gerenciador de objetos do tipo Thread. Ele gerencia uma quantidade de threads estabelecida, que fica aguardando por tarefas fornecidas pelos clientes. A sua grande vantagem é que além de controlarmos a quantidade de threads disponível para uso dos clientes, também podemos fazer o reuso de threads por clientes diferentes, não tendo o gasto de CPU de criar uma nova thread para cada cliente que chega no servidor.
 
@@ -108,7 +108,7 @@ ExecutorService threadPool = Executors.newCachedThreadPool();
 
 - Existe mais uma interface, a ScheduledExecutorService que por sua vez estende o ExecutorService.
 
-![Executor](../img_readme/executors.png)
+![Executor](../asserts/executors.png)
 
 - Também temos uma implementação dela já pronta para usar:
 
@@ -145,18 +145,18 @@ threadEnviaComandos.join();
 ```
 - Quando a thread main executa o método join, ela sabe que precisa esperar a execução da thread que envia os comandos . A thread main ficará esperando até a outra thread acabar.
 
-![Envio e resposta cliente servidor](../img_readme/envio_respostaserver_cliente.png)
+![Envio e resposta cliente servidor](../asserts/envio_respostaserver_cliente.png)
 
 - Uma outra ideia para um projeto cliente-servidor seria usar as Threads para criar um bate papo. Novamente poderíamos ajustar o nosso projeto para tal. A diferença seria que o servidor precisasse manter todos os sockets dos clientes para espalhar as mensagens enviadas.
 
-![Bate papo](../img_readme/bate-papo.png)
+![Bate papo](../asserts/bate-papo.png)
 
 ## Entendendo Volatile
 
 <a name="anc4"></a>
 - Agora temos a seguinte situação: o nosso cliente envia o comando fim, que é recebido através de uma thread dedicada e chama o método parar() que por sua vez manipula o atributo estaRodando.
 
-![Exemplo1](../img_readme/Exemplo_thead.png)
+![Exemplo1](../asserts/Exemplo_thead.png)
 
 - Repare que o acesso ao atributo acontece em uma outra thread, e até poderia acontecer em paralelo.
 
@@ -227,7 +227,7 @@ Main alterando estaRodando = false
 
 
 
-![Exemplo2](../img_readme/cache1.png)
+![Exemplo2](../asserts/cache1.png)
 
 - Então, como podemos dizer que não queremos usar esse cache? Isso é muito fácil e o Java possui uma palavra chave para tal: volatile.
 
@@ -236,7 +236,7 @@ Main alterando estaRodando = false
 private volatile boolean estaRodando = false;
 ```
 
-![Exemplo3](../img_readme/cache2.png)
+![Exemplo3](../asserts/cache2.png)
 
 ### Usando variáveis atômicas
 - Há uma alternativa ao uso da palavra chave volatile. Em vez de usar volatile diretamente, podemos utilizar classes do pacote java.util.concurrent.atomic. Nesse pacote encontraremos uma classe com o nome AtomicBoolean que garante que todas as threads usam essa variável de maneira atômica, sem cache.
